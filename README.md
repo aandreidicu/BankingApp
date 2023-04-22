@@ -1,5 +1,5 @@
 # BankingApp
-##Proiectul implica dezvoltarea unei aplicatii de tip bancar care permite administrarea conturilor bancare ale clientilor inregistrati.Sistemul nostru este conceput sa permita crearea unui cont current pentru fiecare utilizator.
+Proiectul implica dezvoltarea unei aplicatii de tip bancar care permite administrarea conturilor bancare ale clientilor inregistrati.Sistemul nostru este conceput sa permita crearea unui cont current pentru fiecare utilizator.
 ##
 Scopul principal consta in facilitarea operatiunilor bancare: utilizatorii pot adauga bani intr-un depozit, pot efectua tranzactii, pot solicita imprumuturi.
 Plata imprumuturilor este facilitata in aplicatie, utilizatorii pot plati ratele pentru fiecare dintre imprumuturi direct din aplicatie.
