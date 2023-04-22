@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BigBankDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CAEN">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="aDescription" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UsersJuridicals" Relationship="Self.FK_CAEN" FromRole="CAENs" ToRole="UsersJuridical" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="abbrev" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Deposits" Relationship="Self.FK__Deposits__curren__71D1E811" FromRole="Currencies" ToRole="Deposits" />
+    <NavigationProperty Name="Loans" Relationship="Self.FK__Loans__currency__7B5B524B" FromRole="Currencies" ToRole="Loans" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__curre__778AC167" FromRole="Currencies" ToRole="Transactions" />
+    <NavigationProperty Name="CurrentAccounts" Relationship="Self.FK_Currency" FromRole="Currencies" ToRole="CurrentAccount" />
+  </EntityType>
+  <EntityType Name="CurrentAccount">
+    <Key>
+      <PropertyRef Name="IBAN" />
+    </Key>
+    <Property Name="IBAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="Guid" />
+    <Property Name="CompanyID" Type="Guid" />
+    <Property Name="currency" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Currency1" Relationship="Self.FK_Currency" FromRole="CurrentAccount" ToRole="Currencies" />
+    <NavigationProperty Name="LoanPays" Relationship="Self.FK__LoanPays__payIBA__7F2BE32F" FromRole="CurrentAccount" ToRole="LoanPays" />
+    <NavigationProperty Name="Loans" Relationship="Self.FK__Loans__accountIB__7A672E12" FromRole="CurrentAccount" ToRole="Loans" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__destI__76969D2E" FromRole="CurrentAccount" ToRole="Transactions" />
+    <NavigationProperty Name="Transactions1" Relationship="Self.FK__Transacti__srcIB__75A278F5" FromRole="CurrentAccount" ToRole="Transactions" />
+    <NavigationProperty Name="UsersJuridical" Relationship="Self.FK_Company" FromRole="CurrentAccount" ToRole="UsersJuridical" />
+    <NavigationProperty Name="UsersLegal" Relationship="Self.FK_User" FromRole="CurrentAccount" ToRole="UsersLegal" />
+  </EntityType>
+  <EntityType Name="Deposit">
+    <Key>
+      <PropertyRef Name="IBAN" />
+    </Key>
+    <Property Name="IBAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="Guid" />
+    <Property Name="CompanyID" Type="Guid" />
+    <Property Name="currency" Type="Int32" Nullable="false" />
+    <Property Name="depositType" Type="Int32" Nullable="false" />
+    <Property Name="creationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Currency1" Relationship="Self.FK__Deposits__curren__71D1E811" FromRole="Deposits" ToRole="Currencies" />
+    <NavigationProperty Name="UsersJuridical" Relationship="Self.FK__Deposits__Compan__70DDC3D8" FromRole="Deposits" ToRole="UsersJuridical" />
+    <NavigationProperty Name="DepositType1" Relationship="Self.FK__Deposits__deposi__72C60C4A" FromRole="Deposits" ToRole="DepositTypes" />
+    <NavigationProperty Name="UsersLegal" Relationship="Self.FK__Deposits__UserID__6FE99F9F" FromRole="Deposits" ToRole="UsersLegal" />
+  </EntityType>
+  <EntityType Name="DepositType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="dName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="noMonths" Type="Int32" Nullable="false" />
+    <Property Name="intRate" Type="Decimal" Precision="5" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Deposits" Relationship="Self.FK__Deposits__deposi__72C60C4A" FromRole="DepositTypes" ToRole="Deposits" />
+  </EntityType>
+  <EntityType Name="LoanPay">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="loanID" Type="Int32" Nullable="false" />
+    <Property Name="payIBAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="payDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="CurrentAccount" Relationship="Self.FK__LoanPays__payIBA__7F2BE32F" FromRole="LoanPays" ToRole="CurrentAccount" />
+    <NavigationProperty Name="Loan" Relationship="Self.FK__LoanPays__loanID__7E37BEF6" FromRole="LoanPays" ToRole="Loans" />
+  </EntityType>
+  <EntityType Name="Loan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="accountIBAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="loanDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="noMonths" Type="Int32" Nullable="false" />
+    <Property Name="intRate" Type="Decimal" Precision="5" Scale="4" Nullable="false" />
+    <Property Name="amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="currency" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Currency1" Relationship="Self.FK__Loans__currency__7B5B524B" FromRole="Loans" ToRole="Currencies" />
+    <NavigationProperty Name="CurrentAccount" Relationship="Self.FK__Loans__accountIB__7A672E12" FromRole="Loans" ToRole="CurrentAccount" />
+    <NavigationProperty Name="LoanPays" Relationship="Self.FK__LoanPays__loanID__7E37BEF6" FromRole="Loans" ToRole="LoanPays" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="srcIBAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="destIBAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="currency" Type="Int32" Nullable="false" />
+    <Property Name="tranDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="tDescription" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Currency1" Relationship="Self.FK__Transacti__curre__778AC167" FromRole="Transactions" ToRole="Currencies" />
+    <NavigationProperty Name="CurrentAccount" Relationship="Self.FK__Transacti__destI__76969D2E" FromRole="Transactions" ToRole="CurrentAccount" />
+    <NavigationProperty Name="CurrentAccount1" Relationship="Self.FK__Transacti__srcIB__75A278F5" FromRole="Transactions" ToRole="CurrentAccount" />
+  </EntityType>
+  <EntityType Name="UsersJuridical">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Guid" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RegisterCode" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="County" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OfficeAddress" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CAEN" Type="Int32" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CAEN1" Relationship="Self.FK_CAEN" FromRole="UsersJuridical" ToRole="CAENs" />
+    <NavigationProperty Name="CurrentAccounts" Relationship="Self.FK_Company" FromRole="UsersJuridical" ToRole="CurrentAccount" />
+    <NavigationProperty Name="Deposits" Relationship="Self.FK__Deposits__Compan__70DDC3D8" FromRole="UsersJuridical" ToRole="Deposits" />
+  </EntityType>
+  <EntityType Name="UsersLegal">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Guid" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="personalCode" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="birthDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="County" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HomeAddress" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CurrentAccounts" Relationship="Self.FK_User" FromRole="UsersLegal" ToRole="CurrentAccount" />
+    <NavigationProperty Name="Deposits" Relationship="Self.FK__Deposits__UserID__6FE99F9F" FromRole="UsersLegal" ToRole="Deposits" />
+  </EntityType>
+  <Association Name="FK_CAEN">
+    <End Role="CAENs" Type="Self.CAEN" Multiplicity="1" />
+    <End Role="UsersJuridical" Type="Self.UsersJuridical" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAENs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UsersJuridical">
+        <PropertyRef Name="CAEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deposits__curren__71D1E811">
+    <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
+    <End Role="Deposits" Type="Self.Deposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loans__currency__7B5B524B">
+    <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
+    <End Role="Loans" Type="Self.Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Loans">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__curre__778AC167">
+    <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Currency">
+    <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CurrentAccount">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LoanPays__payIBA__7F2BE32F">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="LoanPays" Type="Self.LoanPay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="LoanPays">
+        <PropertyRef Name="payIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loans__accountIB__7A672E12">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="Loans" Type="Self.Loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="Loans">
+        <PropertyRef Name="accountIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__destI__76969D2E">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="destIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__srcIB__75A278F5">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="srcIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company">
+    <End Role="UsersJuridical" Type="Self.UsersJuridical" Multiplicity="0..1" />
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersJuridical">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="CurrentAccount">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User">
+    <End Role="UsersLegal" Type="Self.UsersLegal" Multiplicity="0..1" />
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersLegal">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="CurrentAccount">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deposits__Compan__70DDC3D8">
+    <End Role="UsersJuridical" Type="Self.UsersJuridical" Multiplicity="0..1" />
+    <End Role="Deposits" Type="Self.Deposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersJuridical">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deposits__deposi__72C60C4A">
+    <End Role="DepositTypes" Type="Self.DepositType" Multiplicity="1" />
+    <End Role="Deposits" Type="Self.Deposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepositTypes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="depositType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deposits__UserID__6FE99F9F">
+    <End Role="UsersLegal" Type="Self.UsersLegal" Multiplicity="0..1" />
+    <End Role="Deposits" Type="Self.Deposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersLegal">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LoanPays__loanID__7E37BEF6">
+    <End Role="Loans" Type="Self.Loan" Multiplicity="1" />
+    <End Role="LoanPays" Type="Self.LoanPay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loans">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LoanPays">
+        <PropertyRef Name="loanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BigBankDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CAENs" EntityType="Self.CAEN" />
+    <EntitySet Name="Currencies" EntityType="Self.Currency" />
+    <EntitySet Name="CurrentAccounts" EntityType="Self.CurrentAccount" />
+    <EntitySet Name="Deposits" EntityType="Self.Deposit" />
+    <EntitySet Name="DepositTypes" EntityType="Self.DepositType" />
+    <EntitySet Name="LoanPays" EntityType="Self.LoanPay" />
+    <EntitySet Name="Loans" EntityType="Self.Loan" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <EntitySet Name="UsersJuridicals" EntityType="Self.UsersJuridical" />
+    <EntitySet Name="UsersLegals" EntityType="Self.UsersLegal" />
+    <AssociationSet Name="FK_CAEN" Association="Self.FK_CAEN">
+      <End Role="CAENs" EntitySet="CAENs" />
+      <End Role="UsersJuridical" EntitySet="UsersJuridicals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deposits__curren__71D1E811" Association="Self.FK__Deposits__curren__71D1E811">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loans__currency__7B5B524B" Association="Self.FK__Loans__currency__7B5B524B">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="Loans" EntitySet="Loans" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__curre__778AC167" Association="Self.FK__Transacti__curre__778AC167">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Currency" Association="Self.FK_Currency">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="CurrentAccount" EntitySet="CurrentAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LoanPays__payIBA__7F2BE32F" Association="Self.FK__LoanPays__payIBA__7F2BE32F">
+      <End Role="CurrentAccount" EntitySet="CurrentAccounts" />
+      <End Role="LoanPays" EntitySet="LoanPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loans__accountIB__7A672E12" Association="Self.FK__Loans__accountIB__7A672E12">
+      <End Role="CurrentAccount" EntitySet="CurrentAccounts" />
+      <End Role="Loans" EntitySet="Loans" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__destI__76969D2E" Association="Self.FK__Transacti__destI__76969D2E">
+      <End Role="CurrentAccount" EntitySet="CurrentAccounts" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__srcIB__75A278F5" Association="Self.FK__Transacti__srcIB__75A278F5">
+      <End Role="CurrentAccount" EntitySet="CurrentAccounts" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company" Association="Self.FK_Company">
+      <End Role="UsersJuridical" EntitySet="UsersJuridicals" />
+      <End Role="CurrentAccount" EntitySet="CurrentAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User" Association="Self.FK_User">
+      <End Role="UsersLegal" EntitySet="UsersLegals" />
+      <End Role="CurrentAccount" EntitySet="CurrentAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deposits__Compan__70DDC3D8" Association="Self.FK__Deposits__Compan__70DDC3D8">
+      <End Role="UsersJuridical" EntitySet="UsersJuridicals" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deposits__deposi__72C60C4A" Association="Self.FK__Deposits__deposi__72C60C4A">
+      <End Role="DepositTypes" EntitySet="DepositTypes" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deposits__UserID__6FE99F9F" Association="Self.FK__Deposits__UserID__6FE99F9F">
+      <End Role="UsersLegal" EntitySet="UsersLegals" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LoanPays__loanID__7E37BEF6" Association="Self.FK__LoanPays__loanID__7E37BEF6">
+      <End Role="Loans" EntitySet="Loans" />
+      <End Role="LoanPays" EntitySet="LoanPays" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BigBankDBModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BigBankDBModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

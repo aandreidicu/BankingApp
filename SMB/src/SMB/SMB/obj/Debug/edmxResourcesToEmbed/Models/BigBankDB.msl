@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BigBankDBModelStoreContainer" CdmEntityContainer="BigBankDBEntities1">
+    <EntitySetMapping Name="CAENs">
+      <EntityTypeMapping TypeName="BigBankDBModel.CAEN">
+        <MappingFragment StoreEntitySet="CAENs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="aDescription" ColumnName="aDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currencies">
+      <EntityTypeMapping TypeName="BigBankDBModel.Currency">
+        <MappingFragment StoreEntitySet="Currencies">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="abbrev" ColumnName="abbrev" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrentAccounts">
+      <EntityTypeMapping TypeName="BigBankDBModel.CurrentAccount">
+        <MappingFragment StoreEntitySet="CurrentAccount">
+          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="currency" ColumnName="currency" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deposits">
+      <EntityTypeMapping TypeName="BigBankDBModel.Deposit">
+        <MappingFragment StoreEntitySet="Deposits">
+          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="currency" ColumnName="currency" />
+          <ScalarProperty Name="depositType" ColumnName="depositType" />
+          <ScalarProperty Name="creationDate" ColumnName="creationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepositTypes">
+      <EntityTypeMapping TypeName="BigBankDBModel.DepositType">
+        <MappingFragment StoreEntitySet="DepositTypes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="dName" ColumnName="dName" />
+          <ScalarProperty Name="noMonths" ColumnName="noMonths" />
+          <ScalarProperty Name="intRate" ColumnName="intRate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoanPays">
+      <EntityTypeMapping TypeName="BigBankDBModel.LoanPay">
+        <MappingFragment StoreEntitySet="LoanPays">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="loanID" ColumnName="loanID" />
+          <ScalarProperty Name="payIBAN" ColumnName="payIBAN" />
+          <ScalarProperty Name="pAmount" ColumnName="pAmount" />
+          <ScalarProperty Name="payDate" ColumnName="payDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Loans">
+      <EntityTypeMapping TypeName="BigBankDBModel.Loan">
+        <MappingFragment StoreEntitySet="Loans">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="accountIBAN" ColumnName="accountIBAN" />
+          <ScalarProperty Name="loanDate" ColumnName="loanDate" />
+          <ScalarProperty Name="noMonths" ColumnName="noMonths" />
+          <ScalarProperty Name="intRate" ColumnName="intRate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="currency" ColumnName="currency" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BigBankDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="BigBankDBModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="srcIBAN" ColumnName="srcIBAN" />
+          <ScalarProperty Name="destIBAN" ColumnName="destIBAN" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="currency" ColumnName="currency" />
+          <ScalarProperty Name="tranDate" ColumnName="tranDate" />
+          <ScalarProperty Name="tDescription" ColumnName="tDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersJuridicals">
+      <EntityTypeMapping TypeName="BigBankDBModel.UsersJuridical">
+        <MappingFragment StoreEntitySet="UsersJuridical">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="RegisterCode" ColumnName="RegisterCode" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="CAEN" ColumnName="CAEN" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersLegals">
+      <EntityTypeMapping TypeName="BigBankDBModel.UsersLegal">
+        <MappingFragment StoreEntitySet="UsersLegal">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="personalCode" ColumnName="personalCode" />
+          <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="HomeAddress" ColumnName="HomeAddress" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BigBankDBModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BigBankDBModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BigBankDBModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BigBankDBModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BigBankDBModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BigBankDBModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BigBankDBModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BigBankDBModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BigBankDBModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

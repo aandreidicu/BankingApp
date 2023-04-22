@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="48f3d061121d42d09a1e05b6c04539e7" Name="Diagram1">
+        <EntityTypeShape EntityType="BigBankDBModel.CAEN" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.Currency" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.CurrentAccount" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.Deposit" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.DepositType" Width="1.5" PointX="3.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.LoanPay" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.Loan" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.sysdiagram" Width="1.5" PointX="4.375" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.Transaction" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.UsersJuridical" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BigBankDBModel.UsersLegal" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="BigBankDBModel.FK_CAEN" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Deposits__curren__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Loans__currency__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Transacti__curre__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__LoanPays__payIBA__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Loans__accountIB__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Transacti__destI__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Transacti__srcIB__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK_User" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Deposits__Compan__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Deposits__deposi__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__Deposits__UserID__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="BigBankDBModel.FK__LoanPays__loanID__7E37BEF6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

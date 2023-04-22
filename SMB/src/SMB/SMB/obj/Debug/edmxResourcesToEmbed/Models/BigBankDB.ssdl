@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BigBankDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CAENs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="aDescription" Type="nvarchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Currencies">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="abbrev" Type="varchar" MaxLength="16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CurrentAccount">
+    <Key>
+      <PropertyRef Name="IBAN" />
+    </Key>
+    <Property Name="IBAN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" />
+    <Property Name="CompanyID" Type="uniqueidentifier" />
+    <Property Name="currency" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Deposits">
+    <Key>
+      <PropertyRef Name="IBAN" />
+    </Key>
+    <Property Name="IBAN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" />
+    <Property Name="CompanyID" Type="uniqueidentifier" />
+    <Property Name="currency" Type="int" Nullable="false" />
+    <Property Name="depositType" Type="int" Nullable="false" />
+    <Property Name="creationDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepositTypes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="dName" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="noMonths" Type="int" Nullable="false" />
+    <Property Name="intRate" Type="decimal" Precision="5" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoanPays">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="loanID" Type="int" Nullable="false" />
+    <Property Name="payIBAN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="pAmount" Type="money" Nullable="false" />
+    <Property Name="payDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Loans">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="accountIBAN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="loanDate" Type="date" Nullable="false" />
+    <Property Name="noMonths" Type="int" Nullable="false" />
+    <Property Name="intRate" Type="decimal" Precision="5" Scale="4" Nullable="false" />
+    <Property Name="amount" Type="money" Nullable="false" />
+    <Property Name="currency" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="srcIBAN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="destIBAN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="amount" Type="money" Nullable="false" />
+    <Property Name="currency" Type="int" Nullable="false" />
+    <Property Name="tranDate" Type="date" Nullable="false" />
+    <Property Name="tDescription" Type="nvarchar" MaxLength="64" />
+  </EntityType>
+  <EntityType Name="UsersJuridical">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="RegisterCode" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="County" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="OfficeAddress" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CAEN" Type="int" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsersLegal">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="personalCode" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="birthDate" Type="date" Nullable="false" />
+    <Property Name="County" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="HomeAddress" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Deposits__Compan__70DDC3D8">
+    <End Role="UsersJuridical" Type="Self.UsersJuridical" Multiplicity="0..1" />
+    <End Role="Deposits" Type="Self.Deposits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersJuridical">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deposits__curren__71D1E811">
+    <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+    <End Role="Deposits" Type="Self.Deposits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deposits__deposi__72C60C4A">
+    <End Role="DepositTypes" Type="Self.DepositTypes" Multiplicity="1" />
+    <End Role="Deposits" Type="Self.Deposits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepositTypes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="depositType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deposits__UserID__6FE99F9F">
+    <End Role="UsersLegal" Type="Self.UsersLegal" Multiplicity="0..1" />
+    <End Role="Deposits" Type="Self.Deposits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersLegal">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Deposits">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LoanPays__loanID__7E37BEF6">
+    <End Role="Loans" Type="Self.Loans" Multiplicity="1" />
+    <End Role="LoanPays" Type="Self.LoanPays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loans">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LoanPays">
+        <PropertyRef Name="loanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LoanPays__payIBA__7F2BE32F">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="LoanPays" Type="Self.LoanPays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="LoanPays">
+        <PropertyRef Name="payIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loans__accountIB__7A672E12">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="Loans">
+        <PropertyRef Name="accountIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loans__currency__7B5B524B">
+    <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+    <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Loans">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__curre__778AC167">
+    <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__destI__76969D2E">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="destIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__srcIB__75A278F5">
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentAccount">
+        <PropertyRef Name="IBAN" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="srcIBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAEN">
+    <End Role="CAENs" Type="Self.CAENs" Multiplicity="1" />
+    <End Role="UsersJuridical" Type="Self.UsersJuridical" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAENs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UsersJuridical">
+        <PropertyRef Name="CAEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company">
+    <End Role="UsersJuridical" Type="Self.UsersJuridical" Multiplicity="0..1" />
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersJuridical">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="CurrentAccount">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Currency">
+    <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currencies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CurrentAccount">
+        <PropertyRef Name="currency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User">
+    <End Role="UsersLegal" Type="Self.UsersLegal" Multiplicity="0..1" />
+    <End Role="CurrentAccount" Type="Self.CurrentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersLegal">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="CurrentAccount">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="BigBankDBModelStoreContainer">
+    <EntitySet Name="CAENs" EntityType="Self.CAENs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CurrentAccount" EntityType="Self.CurrentAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deposits" EntityType="Self.Deposits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DepositTypes" EntityType="Self.DepositTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoanPays" EntityType="Self.LoanPays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loans" EntityType="Self.Loans" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersJuridical" EntityType="Self.UsersJuridical" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersLegal" EntityType="Self.UsersLegal" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Deposits__Compan__70DDC3D8" Association="Self.FK__Deposits__Compan__70DDC3D8">
+      <End Role="UsersJuridical" EntitySet="UsersJuridical" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deposits__curren__71D1E811" Association="Self.FK__Deposits__curren__71D1E811">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deposits__deposi__72C60C4A" Association="Self.FK__Deposits__deposi__72C60C4A">
+      <End Role="DepositTypes" EntitySet="DepositTypes" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deposits__UserID__6FE99F9F" Association="Self.FK__Deposits__UserID__6FE99F9F">
+      <End Role="UsersLegal" EntitySet="UsersLegal" />
+      <End Role="Deposits" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LoanPays__loanID__7E37BEF6" Association="Self.FK__LoanPays__loanID__7E37BEF6">
+      <End Role="Loans" EntitySet="Loans" />
+      <End Role="LoanPays" EntitySet="LoanPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LoanPays__payIBA__7F2BE32F" Association="Self.FK__LoanPays__payIBA__7F2BE32F">
+      <End Role="CurrentAccount" EntitySet="CurrentAccount" />
+      <End Role="LoanPays" EntitySet="LoanPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loans__accountIB__7A672E12" Association="Self.FK__Loans__accountIB__7A672E12">
+      <End Role="CurrentAccount" EntitySet="CurrentAccount" />
+      <End Role="Loans" EntitySet="Loans" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loans__currency__7B5B524B" Association="Self.FK__Loans__currency__7B5B524B">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="Loans" EntitySet="Loans" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__curre__778AC167" Association="Self.FK__Transacti__curre__778AC167">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__destI__76969D2E" Association="Self.FK__Transacti__destI__76969D2E">
+      <End Role="CurrentAccount" EntitySet="CurrentAccount" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__srcIB__75A278F5" Association="Self.FK__Transacti__srcIB__75A278F5">
+      <End Role="CurrentAccount" EntitySet="CurrentAccount" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAEN" Association="Self.FK_CAEN">
+      <End Role="CAENs" EntitySet="CAENs" />
+      <End Role="UsersJuridical" EntitySet="UsersJuridical" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company" Association="Self.FK_Company">
+      <End Role="UsersJuridical" EntitySet="UsersJuridical" />
+      <End Role="CurrentAccount" EntitySet="CurrentAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Currency" Association="Self.FK_Currency">
+      <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="CurrentAccount" EntitySet="CurrentAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User" Association="Self.FK_User">
+      <End Role="UsersLegal" EntitySet="UsersLegal" />
+      <End Role="CurrentAccount" EntitySet="CurrentAccount" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
